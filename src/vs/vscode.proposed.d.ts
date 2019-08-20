@@ -1141,4 +1141,21 @@ declare module 'vscode' {
 	}
 
 	//#endregion
+
+	// #region Ben - extension auth flow (desktop+web)
+
+	export namespace env {
+
+		export interface AppUriOptions {
+			payload?: {
+				path?: string;
+				query?: string;
+				fragment?: string;
+			};
+		}
+
+		export function createAppUri(options?: AppUriOptions): Thenable<Uri>;
+	}
+
+	//#endregion
 }
