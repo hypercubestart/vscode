@@ -8,9 +8,8 @@ import * as browser from 'vs/base/browser/browser';
 import { registerSingleton } from 'vs/platform/instantiation/common/extensions';
 import { Event } from 'vs/base/common/event';
 import { IExtensionTipsService, ExtensionRecommendationReason, IExtensionRecommendation } from 'vs/workbench/services/extensionManagement/common/extensionManagement';
-import { IURLHandler, IURLService } from 'vs/platform/url/common/url';
 import { ConsoleLogService, ILogService } from 'vs/platform/log/common/log';
-import { Disposable, IDisposable } from 'vs/base/common/lifecycle';
+import { Disposable } from 'vs/base/common/lifecycle';
 import { IStorageService, StorageScope } from 'vs/platform/storage/common/storage';
 import { IUpdateService, State } from 'vs/platform/update/common/update';
 import { IWindowService, INativeOpenDialogOptions, IEnterWorkspaceResult, IURIToOpen, IMessageBoxResult, IWindowsService, IOpenSettings, IWindowSettings } from 'vs/platform/windows/common/windows';
@@ -114,24 +113,6 @@ export class SimpleUpdateService implements IUpdateService {
 }
 
 registerSingleton(IUpdateService, SimpleUpdateService);
-
-//#endregion
-
-//#region URL
-
-export class SimpleURLService implements IURLService {
-	_serviceBrand: any;
-
-	open(url: URI): Promise<boolean> {
-		return Promise.resolve(false);
-	}
-
-	registerHandler(handler: IURLHandler): IDisposable {
-		return Disposable.None;
-	}
-}
-
-registerSingleton(IURLService, SimpleURLService);
 
 //#endregion
 

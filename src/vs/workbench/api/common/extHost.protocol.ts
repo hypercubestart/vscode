@@ -47,6 +47,7 @@ import { ExtensionActivationError } from 'vs/workbench/services/extensions/commo
 import { createExtHostContextProxyIdentifier as createExtId, createMainContextProxyIdentifier as createMainId, IRPCProtocol } from 'vs/workbench/services/extensions/common/proxyIdentifier';
 import * as search from 'vs/workbench/services/search/common/search';
 import { SaveReason } from 'vs/workbench/services/textfile/common/textfiles';
+import { IURLCreateOptions } from 'vs/platform/url/common/url';
 
 export interface IEnvironment {
 	isExtensionDevelopmentDebug: boolean;
@@ -565,7 +566,7 @@ export interface ExtHostWebviewsShape {
 export interface MainThreadUrlsShape extends IDisposable {
 	$registerUriHandler(handle: number, extensionId: ExtensionIdentifier): Promise<void>;
 	$unregisterUriHandler(handle: number): Promise<void>;
-	$createAppUri(extensionId: ExtensionIdentifier, options?: { payload?: { path?: string, query?: string, fragment?: string } }): Promise<UriComponents>;
+	$createAppUri(extensionId: ExtensionIdentifier, options?: { payload?: IURLCreateOptions }): Promise<UriComponents>;
 }
 
 export interface ExtHostUrlsShape {

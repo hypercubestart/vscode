@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { URI } from 'vs/base/common/uri';
-import { createDecorator } from 'vs/platform/instantiation/common/instantiation';
+import { createDecorator, ServiceIdentifier } from 'vs/platform/instantiation/common/instantiation';
 import { IDisposable } from 'vs/base/common/lifecycle';
 
 export const IURLService = createDecorator<IURLService>('urlService');
@@ -13,9 +13,19 @@ export interface IURLHandler {
 	handleURL(uri: URI): Promise<boolean>;
 }
 
+export interface IURLCreateOptions {
+	path?: string;
+	query?: string;
+	fragment?: string;
+}
+
 export interface IURLService {
-	_serviceBrand: any;
+
+	_serviceBrand: ServiceIdentifier<any>;
+
+	create(identifier: string, options?: IURLCreateOptions): URI;
 
 	open(url: URI): Promise<boolean>;
+
 	registerHandler(handler: IURLHandler): IDisposable;
 }
