@@ -1703,12 +1703,10 @@ export abstract class AbstractTaskService extends Disposable implements ITaskSer
 				});
 				for (let task of tasks) {
 					let key = task.getRecentlyUsedKey();
-					if (!key || !recentlyUsedTasks.has(key)) {
-						if (task._source.kind === TaskSourceKind.Workspace) {
-							configured.push(task);
-						} else {
-							detected.push(task);
-						}
+					if (task._source.kind === TaskSourceKind.Workspace) {
+						configured.push(task);
+					} else if (!key || !recentlyUsedTasks.has(key)) {
+						detected.push(task);
 					}
 				}
 				const sorter = this.createSorter();
